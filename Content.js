@@ -1,4 +1,5 @@
 
+let intervalId = null;
 
 let folderPath = "images/";
 
@@ -20,6 +21,65 @@ let array = [
     "slav-jul.png",
     "sven.png"
 ];
+
+
+function startIntervalIfEnabled() {
+    chrome.storage.sync.get("enabled", (data) => {
+        if (data.enabled) {
+            console.log("Feature is enabled");
+            runRandomInterval();  
+        } else {
+            console.log("Feature is disabled");
+            if (intervalId) {
+                clearTimeout(intervalId); // Stop any pending image appearance
+                intervalId = null;
+            }
+        }
+    });
+}
+
+
+function runRandomInterval(speedMode) {
+    if (intervalId) {
+        clearTimeout(intervalId); // Prevent duplicate intervals
+    }
+
+    if (!speedMode) {
+        chrome.storage.sync.get("speedMode", (data) => {
+            runRandomInterval(data.speedMode || "normal"); // Default to normal
+        });
+        return;
+    }
+
+    let randomTime;
+    switch (speedMode) {
+        case "fast":
+            randomTime = Math.floor(Math.random() * (15000 - 5000) + 10000); // 10-20s
+            break;
+        case "slow":
+            randomTime = Math.floor(Math.random() * (600000 - 120000) + 120000); // 2-10min
+            break;
+        default:
+            randomTime = Math.floor(Math.random() * (300000 - 60000) + 60000); // 1-5min
+            break;
+    }
+
+    console.log(`Next image will appear in ${randomTime / 1000} seconds`);
+
+    intervalId = setTimeout(() => {
+        chrome.storage.sync.get("enabled", (data) => {
+            if (data.enabled) {
+                imageselecter();
+                runRandomInterval(speedMode); // Schedule the next run
+            } else {
+                console.log("Interval stopped because feature is disabled.");
+                intervalId = null;
+            }
+        });
+    }, randomTime);
+}
+
+
 
 //? för test alla gubbar
 //charachternum = 0;
@@ -388,6 +448,8 @@ function imageselecter() {
 //imageselecter();
 //let interval = setInterval(imageselecter, 10000);
 
+/*
+
 function runRandomInterval() {
     let randomTime = Math.floor(Math.random() * (36000 - 15000) + 15000); // Random between 15s-360s
 
@@ -401,9 +463,9 @@ function runRandomInterval() {
 
 runRandomInterval();
 
+*/
 
-
-
+startIntervalIfEnabled();
 
 // **  
 document.addEventListener("keydown", function (event) {
@@ -416,48 +478,3 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-
-
-
-
-
-const positions = [
-    { top: "5%", left: "10%" },   // 1
-    { top: "15%", left: "5%" },   // 2
-    { top: "25%", left: "3%" },   // 3
-    { top: "35%", left: "2%" },   // 4
-    { top: "45%", left: "5%" },   // 5
-    { top: "55%", left: "25%" },  // 6
-    { top: "55%", left: "75%" },  // 7
-    { top: "45%", left: "95%" },  // 8
-    { top: "35%", left: "97%" },  // 9
-    { top: "25%", left: "98%" },  // 10
-    { top: "15%", left: "95%" },  // 11
-    { top: "5%", left: "90%" }    // 12
-];
-
-if (1 + 1 == 3) {
-
-
-    for (let i = 0; i < array.length; i++) {
-        let img = document.createElement("img");
-        img.src = chrome.runtime.getURL(folderPath + imageFiles[i]);
-
-        img.style.position = "fixed";
-        img.style.top = positions[i].top;
-        img.style.left = positions[i].left;
-        img.style.width = "50px"; // Adjust size as needed
-        img.style.zIndex = "10000";
-
-        document.body.appendChild(img);
-    }
-
-    if (document.body.contains(img)) {
-        document.body.removeChild(img);
-    }
-
-    // Append the new image
-    document.body.appendChild(img);
-
-
-}

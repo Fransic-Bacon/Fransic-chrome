@@ -1,20 +1,35 @@
-/* The switch - the box around the slider */
-.switch {
-    margin-left: 30%; /* Center the switch */
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 10px; /* Reduced padding */
+    margin: 0;
+    width: 200px; /* Constrained width */
+    background-color: #f4f4f4; /* Lighter background */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
 }
 
-/* Hide default HTML checkbox */
+h4 {
+    margin: 10px 0; /* Reduced margins */
+    font-size: 16px; /* Slightly smaller font */
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px; /* Smaller switch */
+    height: 20px; /* Smaller switch */
+    margin: 5px; /* Reduced margin */
+}
+
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -23,35 +38,46 @@
     right: 0;
     bottom: 0;
     background-color: #ccc;
+    border-radius: 20px; /* Smaller radius */
+    transition: background-color 0.3s ease;
 }
 
 .slider::before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 16px; /* Smaller thumb */
+    width: 16px; /* Smaller thumb */
+    left: 2px;
+    bottom: 2px;
     background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #4CAF50;
 }
 
-input:checked + .slider:before {
-    transform: translateX(26px); /* Move the slider to the right when checked */
+input:checked + .slider::before {
+    transform: translateX(20px); /* Adjusted translation */
 }
 
-/* Rounded sliders */
-.slider.round {
-    border-radius: 34px;
+span {
+    font-size: 12px; /* Smaller font */
+    margin: 0 5px; /* Reduced margin */
+    vertical-align: middle;
 }
 
-.slider.round::before {
-    border-radius: 50%;
+label {
+    display: inline-flex;
+    align-items: center;
+    margin: 2px; /* Reduced margin */
 }
 
-.secret {
-    margin: 5px;
+/* Grouping the speed options */
+.speed-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping onto multiple lines */
+    justify-content: center; /* Center the items */
+    margin-top: 5px; /* Add some space above the speed group */
 }

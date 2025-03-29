@@ -1,14 +1,42 @@
 <html lang="en">
+
 <head>
     <title>My popup</title>
     <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
+
 <body>
-<label class="switch">
-    <input id="enabled" type="checkbox">
-    <span class="slider round"></span>
-</label>
-<input class="secret" id="item" type="text">
-<script src="popup.js"></script>
+    <h4>Off || On</h4>
+    <label class="switch">
+        <input id="enabled" type="checkbox">
+        <span class="slider round"></span>
+    </label>
+
+    <h4>Spawn Rate</h4> <!-- Label for the speed options -->
+
+    <!-- Second switch for Fast -->
+    <span>Fast</span>
+    <label class="switch">
+        <input id="fast" type="checkbox">
+        <span class="slider round"></span>
+    </label>
+
+    <span>Normal</span>
+    <!-- Third switch for Normal -->
+    <label class="switch">
+        <input id="normal" type="checkbox">
+        <span class="slider round"></span>
+    </label>
+
+    <span>Slow</span>
+    <!-- Fourth switch for Slow -->
+    <label class="switch">
+        <input id="slow" type="checkbox">
+        <span class="slider round"></span>
+    </label>
+
+    <script src="popup.js"></script>
+
 </body>
+
 </html>

@@ -8,7 +8,7 @@
         "128": "images/thisicon.png"
     },
     "action": {
-        "defult_popup": "popup.html"
+        "default_popup": "popup.html"
     },
     "content_scripts": [
         {
