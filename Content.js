@@ -27,7 +27,7 @@ function startIntervalIfEnabled() {
     chrome.storage.sync.get("enabled", (data) => {
         if (data.enabled) {
             console.log("Feature is enabled");
-            runRandomInterval();  
+            runRandomInterval();
         } else {
             console.log("Feature is disabled");
             if (intervalId) {
@@ -104,8 +104,8 @@ function imageselecter() {
         existingImg.remove();
     }
 
-//? för test animationer
-//    num = 9;
+    //? för test animationer
+    //    num = 9;
     //! övre högre hörnet
     if (num == 1) {
 
@@ -393,15 +393,14 @@ function imageselecter() {
     else if (num == 9) {
 
         img.style.position = "fixed";
-        img.style.bottom = "0px"; 
+        img.style.bottom = "0px";
         img.style.left = "-150px";
 
         if (charachternum == 3 || charachternum == 7) {
             img.style.bottom = "-5px";
         }
 
-        if(charachternum == 5 || charachternum == 0) 
-        {
+        if (charachternum == 5 || charachternum == 0) {
             img.style.bottom = "-6px";
         }
 
@@ -441,40 +440,26 @@ function imageselecter() {
 
     }
 
-        //? för test alla gubbar
-  //  charachternum++;
+    //? för test alla gubbar
+    //  charachternum++;
 }
 
 //imageselecter();
 //let interval = setInterval(imageselecter, 10000);
 
-/*
-
-function runRandomInterval() {
-    let randomTime = Math.floor(Math.random() * (36000 - 15000) + 15000); // Random between 15s-360s
-
-    console.log(`Next imageselecter will run in ${randomTime / 1000} seconds`);
-
-    setTimeout(() => {
-        imageselecter(); // Run the function
-        runRandomInterval(); // Schedule the next run
-    }, randomTime);
-}
-
-runRandomInterval();
-
-*/
-
 startIntervalIfEnabled();
+
+
 
 // **  
 document.addEventListener("keydown", function (event) {
-   
+
     if (event.ctrlKey && event.shiftKey && event.key === 'K') {
-      
-        imageselecter();  
 
-       
+        imageselecter();
+        imageselecter();
+        imageselecter();
     }
-});
 
+ 
+});
