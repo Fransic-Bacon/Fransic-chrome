@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "fransic-extension",
+    "version": "1.0.0",
+    "content_scripts": [
+  {
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["Content.js"]
+  }
+],
+"web_accessible_resources": [
+  {
+    "resources": ["images/*"],
+    "matches": ["<all_urls>"]
+  }
+]
+  }
