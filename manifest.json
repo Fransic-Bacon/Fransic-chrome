@@ -2,16 +2,38 @@
     "manifest_version": 3,
     "name": "fransic-extension",
     "version": "1.0.0",
+    "icons": {
+        "16": "images/thisicon.png",
+        "48": "images/thisicon.png",
+        "128": "images/thisicon.png"
+    },
+    "action": {
+        "defult_popup": "popup.html"
+    },
     "content_scripts": [
-  {
-    "matches": ["http://*/*", "https://*/*"],
-    "js": ["Content.js"]
-  }
-],
-"web_accessible_resources": [
-  {
-    "resources": ["images/*"],
-    "matches": ["<all_urls>"]
-  }
-]
-  }
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "Content.js"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "images/*"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "permissions": [
+        "scripting",
+        "activeTab",
+        "storage"
+    ]
+}

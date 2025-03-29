@@ -1,3 +1,5 @@
+
+
 let folderPath = "images/";
 
 let array = [
@@ -383,8 +385,23 @@ function imageselecter() {
   //  charachternum++;
 }
 
-imageselecter();
-let interval = setInterval(imageselecter, 10000);
+//imageselecter();
+//let interval = setInterval(imageselecter, 10000);
+
+function runRandomInterval() {
+    let randomTime = Math.floor(Math.random() * (36000 - 15000) + 15000); // Random between 15s-360s
+
+    console.log(`Next imageselecter will run in ${randomTime / 1000} seconds`);
+
+    setTimeout(() => {
+        imageselecter(); // Run the function
+        runRandomInterval(); // Schedule the next run
+    }, randomTime);
+}
+
+runRandomInterval();
+
+
 
 
 
@@ -392,7 +409,6 @@ let interval = setInterval(imageselecter, 10000);
 document.addEventListener("keydown", function (event) {
    
     if (event.ctrlKey && event.shiftKey && event.key === 'K') {
-       clearInterval(interval);
       
         imageselecter();  
 
@@ -420,10 +436,10 @@ const positions = [
     { top: "5%", left: "90%" }    // 12
 ];
 
-if (1 + 2 == 3) {
+if (1 + 1 == 3) {
 
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         let img = document.createElement("img");
         img.src = chrome.runtime.getURL(folderPath + imageFiles[i]);
 
