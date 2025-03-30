@@ -31,7 +31,7 @@ function startIntervalIfEnabled() {
         } else {
             console.log("Feature is disabled");
             if (intervalId) {
-                clearTimeout(intervalId); // Stop any pending image appearance
+                clearTimeout(intervalId);
                 intervalId = null;
             }
         }
@@ -41,12 +41,12 @@ function startIntervalIfEnabled() {
 
 function runRandomInterval(speedMode) {
     if (intervalId) {
-        clearTimeout(intervalId); // Prevent duplicate intervals
+        clearTimeout(intervalId); 
     }
 
     if (!speedMode) {
         chrome.storage.sync.get("speedMode", (data) => {
-            runRandomInterval(data.speedMode || "normal"); // Default to normal
+            runRandomInterval(data.speedMode || "normal"); 
         });
         return;
     }
@@ -54,13 +54,13 @@ function runRandomInterval(speedMode) {
     let randomTime;
     switch (speedMode) {
         case "fast":
-            randomTime = Math.floor(Math.random() * (15000 - 5000) + 10000); // 10-20s
+            randomTime = Math.floor(Math.random() * (15000 - 5000) + 10000); //! 10-20s
             break;
         case "slow":
-            randomTime = Math.floor(Math.random() * (600000 - 120000) + 120000); // 2-10min
+            randomTime = Math.floor(Math.random() * (600000 - 120000) + 120000); //! 2-10min
             break;
         default:
-            randomTime = Math.floor(Math.random() * (300000 - 60000) + 60000); // 1-5min
+            randomTime = Math.floor(Math.random() * (300000 - 60000) + 60000); //! 1-5min
             break;
     }
 
@@ -81,14 +81,16 @@ function runRandomInterval(speedMode) {
 
 
 
-//? för test alla gubbar
-//charachternum = 0;
+
+
+//! num bestämmer plats
 let num
 function imageselecter(num) {
 
     const img = document.createElement("img");
     img.style.transform = "rotate(0deg)";
 
+    //! charachternum bestämmer karaktär
     let charachternum = Math.floor(Math.random() * 16);
 
     let result = array[charachternum];
@@ -109,19 +111,18 @@ function imageselecter(num) {
         existingImg.remove();
     }
 
-    //? för test animationer
-    //    num = 9;
+   
     //! övre högre hörnet
     if (num == 1) {
 
 
         img.style.position = "fixed";
-        img.style.top = "-25px"; // Distance from the top
+        img.style.top = "-25px";
         img.style.right = "-150px";
         img.style.transform = "rotate(-175deg)";
 
         if (charachternum == 3 || charachternum == 7) {
-            img.style.top = "-20px"; // Distance from the top
+            img.style.top = "-20px";
             img.style.transform = "rotate(-125deg)";
 
         }
@@ -185,12 +186,12 @@ function imageselecter(num) {
     else if (num == 3) {
 
         img.style.position = "fixed";
-        img.style.bottom = "-25px"; // Distance from the top
+        img.style.bottom = "-25px"; 
         img.style.right = "-150px";
         img.style.transform = "rotate(-45deg)";
 
         if (charachternum == 3 || charachternum == 7) {
-            img.style.bottom = "-20px"; // Distance from the top
+            img.style.bottom = "-20px";
             img.style.transform = "rotate(-25deg)";
 
         }
@@ -222,11 +223,11 @@ function imageselecter(num) {
     //! 33% från höger nedre mitten
     else if (num == 4) {
         img.style.position = "fixed";
-        img.style.bottom = "-150px"; // Starts below the screen
-        img.style.right = "33%"; // 33% from the right edge
+        img.style.bottom = "-150px"; 
+        img.style.right = "33%"; 
 
         if (charachternum == 3 || charachternum == 7) {
-            img.style.bottom = "-20px"; // Distance from the top
+            img.style.bottom = "-20px"; 
         }
 
 
@@ -241,7 +242,7 @@ function imageselecter(num) {
 
 
         setTimeout(() => {
-            img.style.bottom = "-150px"; // Moves it back down
+            img.style.bottom = "-150px"; 
         }, 2500);
 
         setTimeout(() => {
@@ -254,11 +255,11 @@ function imageselecter(num) {
     //! 66% från höger nedre mitten
     else if (num == 5) {
         img.style.position = "fixed";
-        img.style.bottom = "-150px"; // Starts below the screen
-        img.style.right = "66%"; // 33% from the right edge
+        img.style.bottom = "-150px"; 
+        img.style.right = "66%"; 
 
         if (charachternum == 3 || charachternum == 7) {
-            img.style.bottom = "-20px"; // Distance from the top
+            img.style.bottom = "-20px"; 
         }
 
 
@@ -273,7 +274,7 @@ function imageselecter(num) {
 
 
         setTimeout(() => {
-            img.style.bottom = "-150px"; // Moves it back down
+            img.style.bottom = "-150px"; 
         }, 2500);
 
         setTimeout(() => {
@@ -289,12 +290,12 @@ function imageselecter(num) {
 
 
         img.style.position = "fixed";
-        img.style.bottom = "-25px"; // Distance from the top
+        img.style.bottom = "-25px"; 
         img.style.left = "-150px";
         img.style.transform = "rotate(45deg)";
 
         if (charachternum == 3 || charachternum == 7) {
-            img.style.bottom = "-20px"; // Distance from the top
+            img.style.bottom = "-20px"; 
             img.style.transform = "rotate(25deg)";
 
         }
@@ -445,12 +446,7 @@ function imageselecter(num) {
 
     }
 
-    //? för test alla gubbar
-    //  charachternum++;
 }
-
-//imageselecter();
-//let interval = setInterval(imageselecter, 10000);
 
 startIntervalIfEnabled();
 
