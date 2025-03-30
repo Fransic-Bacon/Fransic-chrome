@@ -69,7 +69,7 @@ function runRandomInterval(speedMode) {
     intervalId = setTimeout(() => {
         chrome.storage.sync.get("enabled", (data) => {
             if (data.enabled) {
-                imageselecter();
+                imageselecter(0);
                 runRandomInterval(speedMode); // Schedule the next run
             } else {
                 console.log("Interval stopped because feature is disabled.");
@@ -83,7 +83,8 @@ function runRandomInterval(speedMode) {
 
 //? för test alla gubbar
 //charachternum = 0;
-function imageselecter() {
+let num
+function imageselecter(num) {
 
     const img = document.createElement("img");
     img.style.transform = "rotate(0deg)";
@@ -92,7 +93,11 @@ function imageselecter() {
 
     let result = array[charachternum];
 
-    let num = Math.floor(Math.random() * 9) + 1;
+    if (num == 0) {
+        num = Math.floor(Math.random() * 9) + 1;
+    }
+
+
 
     img.src = chrome.runtime.getURL(folderPath + result);
 
@@ -456,10 +461,30 @@ document.addEventListener("keydown", function (event) {
 
     if (event.ctrlKey && event.shiftKey && event.key === 'K') {
 
-        imageselecter();
-        imageselecter();
-        imageselecter();
+        imageselecter(1);
+        imageselecter(2);
+        imageselecter(3);
+        imageselecter(4);
+        imageselecter(5);
+        imageselecter(6);
+        imageselecter(7);
+        imageselecter(8);
+        imageselecter(9);
+
+
+        setTimeout(() => {
+            imageselecter(9);
+        },500);
+
+        setTimeout(() => {
+            imageselecter(9);
+        }, 1000);
+
+        setTimeout(() => {
+            imageselecter(9);
+        }, 750);
+
     }
 
- 
+
 });
