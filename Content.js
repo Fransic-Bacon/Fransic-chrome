@@ -24,6 +24,7 @@ let array = [
 
 //? för bilder som jag tryckt på
 let physicsImages = [];
+let physicsImagesnmber = 0;
 
 function startIntervalIfEnabled() {
     chrome.storage.sync.get("enabled", (data) => {
@@ -532,8 +533,25 @@ document.addEventListener("keydown", function (event) {
 
     }
 
+    if(event.ctrlKey && event.key === 'm')
+    {
+        deletephysics();
+        
+    }
 
 });
+
+
+
+function deletephysics() {
+    physicsImages.forEach(obj => {
+        if (document.body.contains(obj.element)) {
+            document.body.removeChild(obj.element);
+        }
+    });
+    physicsImages = [];  // Clear the array
+    physicsImagesnmber = 0; // Reset the counter
+}
 
 
 let isPhysicsRunning = false; // Prevent multiple loops
