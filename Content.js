@@ -19,7 +19,8 @@ let array = [
     "bagarebengtsson.png",
     "fransic-jul.png",
     "slav-jul.png",
-    "sven.png"
+    "sven.png",
+    "helicopter.png"
 ];
 
 
@@ -69,7 +70,7 @@ function runRandomInterval(speedMode) {
     intervalId = setTimeout(() => {
         chrome.storage.sync.get("enabled", (data) => {
             if (data.enabled) {
-                imageselecter(0);
+                imageselecter(0,250);
                 runRandomInterval(speedMode); // Schedule the next run
             } else {
                 console.log("Interval stopped because feature is disabled.");
@@ -84,14 +85,21 @@ function runRandomInterval(speedMode) {
 
 
 //! num bestämmer plats
-let num
-function imageselecter(num) {
+let num;
+let charachternum; 
+function imageselecter(num,charachternum) {
 
     const img = document.createElement("img");
     img.style.transform = "rotate(0deg)";
 
     //! charachternum bestämmer karaktär
-    let charachternum = Math.floor(Math.random() * 16);
+    //! 250 är ett random nummer som jag bara valde
+    //! IFall det är 250 så blir det en random gubbe
+    if(charachternum == 250)
+    {
+     charachternum = Math.floor(Math.random() * 17);
+    }
+
 
     let result = array[charachternum];
 
@@ -99,17 +107,15 @@ function imageselecter(num) {
         num = Math.floor(Math.random() * 9) + 1;
     }
 
+    if(charachternum == 16 ){
+        num = 9;
+    }
 
 
     img.src = chrome.runtime.getURL(folderPath + result);
 
     img.style.width = "100px";
     img.style.zIndex = "10000";
-
-    const existingImg = document.querySelector("img");
-    if (existingImg) {
-        existingImg.remove();
-    }
 
    
     //! övre högre hörnet
@@ -400,6 +406,12 @@ function imageselecter(num) {
 
         img.style.position = "fixed";
         img.style.bottom = "0px";
+
+        if(charachternum == 16)
+        {
+            img.style.bottom ="10%";
+        }
+
         img.style.left = "-150px";
 
         if (charachternum == 3 || charachternum == 7) {
@@ -416,7 +428,13 @@ function imageselecter(num) {
 
 
         setTimeout(() => {
+            if(charachternum == 16)
+            {
+                img.style.left = "140%";    
+            }
+            else{
             img.style.left = "105%";
+            }
         }, 2500);
 
 
@@ -457,28 +475,32 @@ document.addEventListener("keydown", function (event) {
 
     if (event.ctrlKey && event.shiftKey && event.key === 'K') {
 
-        imageselecter(1);
-        imageselecter(2);
-        imageselecter(3);
-        imageselecter(4);
-        imageselecter(5);
-        imageselecter(6);
-        imageselecter(7);
-        imageselecter(8);
-        imageselecter(9);
+        imageselecter(1,250);
+        imageselecter(2,250);
+        imageselecter(3,250);
+        imageselecter(4,250);
+        imageselecter(5,250);
+        imageselecter(6,250);
+        imageselecter(7,250);
+        imageselecter(8,250);
+        imageselecter(9,250);
 
 
         setTimeout(() => {
-            imageselecter(9);
+            imageselecter(9,250);
         },500);
 
         setTimeout(() => {
-            imageselecter(9);
+            imageselecter(9,250);
         }, 1000);
 
         setTimeout(() => {
-            imageselecter(9);
+            imageselecter(9,250);
         }, 750);
+
+        setTimeout(() => {
+            imageselecter(9,16);
+        }, 1000);
 
     }
 
