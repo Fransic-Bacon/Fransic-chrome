@@ -743,6 +743,10 @@ function checkCollisions() {
                     img1.element.style.top = `${rect1.top + 2}px`;
                 }
 
+
+
+                //!!sadasdasdasd
+
                 if (Math.abs(img2.velocityX) < 0.2 && Math.abs(img2.velocityY) < 0.2) {
                     img2.velocityX = 0;
                     img2.velocityY = 0;
