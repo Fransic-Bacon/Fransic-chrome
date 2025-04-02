@@ -11,7 +11,7 @@ let array = [
     "Pieere-french.png",
     "hat.png",
     "slav.png",
-    "snobben.png", 
+    "snobben.png",
     "snobben2.png",
     "svenn.png",
     "tank-pieere.png",
@@ -125,7 +125,7 @@ function imageselecter(num, charachternum) {
         img.style.width = "125px";
     }
 
-  
+
 
     //! övre högre hörnet
     if (num == 1) {
@@ -533,10 +533,9 @@ document.addEventListener("keydown", function (event) {
 
     }
 
-    if(event.ctrlKey && event.key === 'm')
-    {
+    if (event.ctrlKey && event.key === 'm') {
         deletephysics();
-        
+
     }
 
 });
@@ -581,7 +580,7 @@ function physics(rndnum) {
     }
 
     else if (rndnum == 3) {
-        let smallarr = ["0", "2","5","11","6"];
+        let smallarr = ["0", "2", "5", "11", "6"];
         rndnumer = Math.floor(Math.random() * 5)
         let physicsCharacterNum = smallarr[rndnumer];
         physResult = array[physicsCharacterNum];
@@ -596,6 +595,11 @@ function physics(rndnum) {
         velocityX: (Math.random() - 0.5) * 2.5, //? Slightly reduced initial speed
         velocityY: Math.random() * 3 + 1, //? Reduced fall speed
         bounceFactor: 0.3, //? New: Keeps reducing bounce effect after each hit
+    });
+
+
+    phyImage.addEventListener("click", function (event) {
+        document.body.removeChild(event.target);
     });
 
     phyImage.style.transition = "transform 0.2s ease-out";
@@ -627,7 +631,7 @@ function updatePhysics() {
 
         // **Screen Borders** (left, right, and top)
         if (newLeft <= 5) {
-            obj.velocityX *=  0.2 //-0.2; 
+            obj.velocityX *= 0.2 //-0.2; 
             newLeft = 5;
         }
 
@@ -639,7 +643,7 @@ function updatePhysics() {
 
 
         if (newTop <= 5) {
-            obj.velocityY = Math.max(2, obj.velocityY * 0.5); 
+            obj.velocityY = Math.max(2, obj.velocityY * 0.5);
             newTop = 5;
         }
 
