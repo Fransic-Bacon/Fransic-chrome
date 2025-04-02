@@ -567,7 +567,7 @@ function physics(rndnum) {
     let phyImage = document.createElement('img');
 
     if (rndnum == 0) {
-        let physicsCharacterNum = Math.floor(Math.random() * 17);
+        let physicsCharacterNum = Math.floor(Math.random() * 18);
         physResult = array[physicsCharacterNum];
     }
 
