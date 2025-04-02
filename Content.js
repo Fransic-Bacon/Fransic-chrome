@@ -11,7 +11,7 @@ let array = [
     "Pieere-french.png",
     "hat.png",
     "slav.png",
-    "snobben.png", 
+    "snobben.png",
     "snobben2.png",
     "svenn.png",
     "tank-pieere.png",
@@ -19,7 +19,8 @@ let array = [
     "fransic-jul.png",
     "slav-jul.png",
     "sven.png",
-    "helicopter.png"
+    "helicopter.png",
+    "krabban-kurt.png"
 ];
 
 //? för bilder som jag tryckt på
@@ -101,10 +102,10 @@ function imageselecter(num, charachternum) {
     //! 250 är ett random nummer som jag bara valde
     //! IFall det är 250 så blir det en random gubbe
     if (charachternum == 250) {
-        charachternum = Math.floor(Math.random() * 17);
+        charachternum = Math.floor(Math.random() * 18);
     }
 
-
+   
     let result = array[charachternum];
 
     if (num == 0) {
@@ -115,6 +116,7 @@ function imageselecter(num, charachternum) {
         num = 9;
     }
 
+   
 
     img.src = chrome.runtime.getURL(folderPath + result);
 
@@ -125,7 +127,7 @@ function imageselecter(num, charachternum) {
         img.style.width = "125px";
     }
 
-  
+
 
     //! övre högre hörnet
     if (num == 1) {
@@ -508,6 +510,10 @@ document.addEventListener("keydown", function (event) {
             imageselecter(9, 16);
         }, 1000);
 
+        setTimeout(() => {
+            imageselecter(9, 17);
+        }, 1250);
+
     }
 
     //! RND charachter
@@ -533,10 +539,9 @@ document.addEventListener("keydown", function (event) {
 
     }
 
-    if(event.ctrlKey && event.key === 'm')
-    {
+    if (event.ctrlKey && event.key === 'm') {
         deletephysics();
-        
+
     }
 
 });
@@ -581,7 +586,7 @@ function physics(rndnum) {
     }
 
     else if (rndnum == 3) {
-        let smallarr = ["0", "2","5","11","6"];
+        let smallarr = ["0", "2", "5", "11", "6"];
         rndnumer = Math.floor(Math.random() * 5)
         let physicsCharacterNum = smallarr[rndnumer];
         physResult = array[physicsCharacterNum];
@@ -596,6 +601,14 @@ function physics(rndnum) {
         velocityX: (Math.random() - 0.5) * 2.5, //? Slightly reduced initial speed
         velocityY: Math.random() * 3 + 1, //? Reduced fall speed
         bounceFactor: 0.3, //? New: Keeps reducing bounce effect after each hit
+    });
+
+    phyImage.style.cursor = "pointer";
+
+
+//? DÖDAR BILDER DU TRYCKER PÅ
+    phyImage.addEventListener("click", function (event) {
+        document.body.removeChild(event.target);
     });
 
     phyImage.style.transition = "transform 0.2s ease-out";
@@ -627,15 +640,19 @@ function updatePhysics() {
 
         // **Screen Borders** (left, right, and top)
         if (newLeft <= 5) {
-            obj.velocityX *= -0.4; // Less bounce
+            obj.velocityX *= 0.2 //-0.2; 
             newLeft = 5;
         }
+
+
         if (newLeft + rect.width >= window.innerWidth - 5) {
-            obj.velocityX *= -0.4;
+            obj.velocityX *= -0.2;
             newLeft = window.innerWidth - rect.width - 5;
         }
+
+
         if (newTop <= 5) {
-            obj.velocityY *= -0.4;
+            obj.velocityY = Math.max(2, obj.velocityY * 0.5);
             newTop = 5;
         }
 
@@ -659,13 +676,13 @@ function updatePhysics() {
         if (obj.settleTime && currentTime - obj.settleTime > 15000) {
             if (!obj.walking) {
                 obj.walking = true;
-                let moveDistance = 150; // Move up to 150px total
+                let moveDistance = 10; // Move up to 150px total
                 let walkInterval = setInterval(() => {
                     // Move left or right by 5-10px
                     obj.velocityX = (Math.random() < 0.5 ? -1 : 1) * (Math.random() * 5 + 5);
 
                     // Add small vertical jumps
-                    obj.velocityY = -Math.random() * 3 - 2; // Tiny jump (falling slightly down as they walk)
+                    obj.velocityY = -Math.random() * 0.5 - 2; // Tiny jump (falling slightly down as they walk)
 
                     moveDistance -= Math.abs(obj.velocityX);
                     if (moveDistance <= 0 || Math.random() < 0.1) { // Stop randomly sometimes
@@ -685,6 +702,7 @@ function updatePhysics() {
             obj.velocityX = 0;
             obj.velocityY = 0;
         }
+
     });
 
     checkCollisions();
@@ -724,18 +742,12 @@ function checkCollisions() {
                 if (speed > 0) continue; // Prevent objects from sticking together
 
                 // **Even Less Bounce Effect**
-                let collisionDampening = 0.2; //? Lowered to reduce bounce further
+                let collisionDampening = 0.06; //? Lowered to reduce bounce further
                 img1.velocityX -= nx * (speed * collisionDampening);
                 img1.velocityY -= ny * (speed * collisionDampening);
                 img2.velocityX += nx * (speed * collisionDampening);
                 img2.velocityY += ny * (speed * collisionDampening);
 
-                // Random rotation effect
-                let randomRotation1 = (Math.random() * 30 - 15).toFixed(1); // Even less rotation
-                let randomRotation2 = (Math.random() * 30 - 15).toFixed(1);
-
-                img1.element.style.transform = `rotate(${randomRotation1}deg)`;
-                img2.element.style.transform = `rotate(${randomRotation2}deg)`;
 
                 // If they are slow, make them settle
                 if (Math.abs(img1.velocityX) < 0.2 && Math.abs(img1.velocityY) < 0.2) {
@@ -743,6 +755,10 @@ function checkCollisions() {
                     img1.velocityY = 0;
                     img1.element.style.top = `${rect1.top + 2}px`;
                 }
+
+
+
+                //!!sadasdasdasd
 
                 if (Math.abs(img2.velocityX) < 0.2 && Math.abs(img2.velocityY) < 0.2) {
                     img2.velocityX = 0;
