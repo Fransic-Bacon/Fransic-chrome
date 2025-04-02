@@ -597,7 +597,10 @@ function physics(rndnum) {
         bounceFactor: 0.3, //? New: Keeps reducing bounce effect after each hit
     });
 
+    phyImage.style.cursor = "pointer";
 
+
+//? DÖDAR BILDER DU TRYCKER PÅ
     phyImage.addEventListener("click", function (event) {
         document.body.removeChild(event.target);
     });
