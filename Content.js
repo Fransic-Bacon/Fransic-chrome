@@ -579,8 +579,8 @@ function physics(rndnum) {
     }
 
     else if (rndnum == 2) {
-        let smallarr = ["8", "9"];
-        rndnumer = Math.floor(Math.random() * 2)
+        let smallarr = ["4","8", "9"];
+        rndnumer = Math.floor(Math.random() * 3)
         let physicsCharacterNum = smallarr[rndnumer];
         physResult = array[physicsCharacterNum];
     }
