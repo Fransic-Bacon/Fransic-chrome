@@ -1,6 +1,5 @@
-let intervalId = null;
 
-let folderPath = "images/";
+let folderPath = "imagess/";
 
 let array = [
     "basic-pieere.png",
@@ -27,65 +26,13 @@ let array = [
 let physicsImages = [];
 let physicsImagesnmber = 0;
 
-function startIntervalIfEnabled() {
-    chrome.storage.sync.get("enabled", (data) => {
-        if (data.enabled) {
-            console.log("Feature is enabled");
-            runRandomInterval();
-        } else {
-            console.log("Feature is disabled");
-            if (intervalId) {
-                clearTimeout(intervalId);
-                intervalId = null;
-            }
-        }
-    });
+
+
+setInterval(bruh,500);
+
+function bruh(){
+imageselecter(0,250);
 }
-
-
-function runRandomInterval(speedMode) {
-    if (intervalId) {
-        clearTimeout(intervalId);
-    }
-
-    if (!speedMode) {
-        chrome.storage.sync.get("speedMode", (data) => {
-            runRandomInterval(data.speedMode || "normal");
-        });
-        return;
-    }
-
-    let randomTime;
-    switch (speedMode) {
-        case "fast":
-            randomTime = Math.floor(Math.random() * (15000 - 5000) + 10000); //! 10-20s
-            break;
-        case "slow":
-            randomTime = Math.floor(Math.random() * (600000 - 120000) + 120000); //! 2-10min
-            break;
-        default:
-            randomTime = Math.floor(Math.random() * (300000 - 60000) + 60000); //! 1-5min
-            break;
-    }
-
-    console.log(`Next image will appear in ${randomTime / 1000} seconds`);
-
-    intervalId = setTimeout(() => {
-        chrome.storage.sync.get("enabled", (data) => {
-            if (data.enabled) {
-                imageselecter(0, 250);
-                runRandomInterval(speedMode); // Schedule the next run
-            } else {
-                console.log("Interval stopped because feature is disabled.");
-                intervalId = null;
-            }
-        });
-    }, randomTime);
-}
-
-
-
-
 
 //! num bestämmer plats
 let num;
@@ -118,7 +65,7 @@ function imageselecter(num, charachternum) {
 
    
 
-    img.src = chrome.runtime.getURL(folderPath + result);
+    img.src = folderPath + result;
 
     img.style.width = "100px";
     img.style.zIndex = "10000";
@@ -474,7 +421,6 @@ function imageselecter(num, charachternum) {
     }
 }
 
-startIntervalIfEnabled();
 
 
 
@@ -579,7 +525,7 @@ function physics(rndnum) {
     }
 
     else if (rndnum == 2) {
-        let smallarr = ["4","8", "9"];
+        let smallarr = ["8", "9","4"];
         rndnumer = Math.floor(Math.random() * 3)
         let physicsCharacterNum = smallarr[rndnumer];
         physResult = array[physicsCharacterNum];
